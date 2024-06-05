@@ -7,6 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useRef, useState } from 'react';
+import { useFonts, Langar_400Regular } from '@expo-google-fonts/langar';
 
 const Login = () => {
   const inputRefs = useRef([]);

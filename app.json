@@ -1,5 +1,12 @@
 {
   "expo": {
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gymingo.gymingo",
+      "config": {
+        "googleMapsApiKey": ""
+      }
+    },
     "scheme": "acme",
     "web": {
       "bundler": "metro"
