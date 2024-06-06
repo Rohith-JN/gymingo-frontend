@@ -1,4 +1,4 @@
-import { Link, Stack } from 'expo-router';
+import { Link } from 'expo-router';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
 import {
   TextInput,
@@ -7,18 +7,10 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useRef, useState } from 'react';
-import { useFonts, Langar_400Regular } from '@expo-google-fonts/langar';
 
 const Login = () => {
   const inputRefs = useRef([]);
   const [code, setCode] = useState(Array(6).fill(''));
-
-  const [loadedFonts] = useFonts({
-    Langar: Langar_400Regular,
-  });
-  if (!loadedFonts) {
-    return null;
-  }
 
   const handleTextChange = (text, index) => {
     let newCode = [...code];
@@ -38,16 +30,6 @@ const Login = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView edges={['bottom', 'left', 'right']} style={{ flex: 1 }}>
-        <Stack.Screen
-          options={{
-            headerTitle: '',
-            headerLeft: () => (
-              <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>
-                Gymingo
-              </Text>
-            ),
-          }}
-        />
         <KeyboardAvoidingView behavior="height" keyboardVerticalOffset={-260}>
           <View
             style={{
