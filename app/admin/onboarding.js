@@ -12,6 +12,7 @@ import {
 import { Stack, useRouter } from 'expo-router';
 import { useState, useEffect, useContext } from 'react';
 import { SharedContext } from '../context';
+import * as Location from 'expo-location';
 
 const OnBoarding = () => {
   const router = useRouter();
@@ -20,10 +21,13 @@ const OnBoarding = () => {
 
   useEffect(() => {
     if (sharedData && sharedData.latitude && sharedData.longitude) {
-      setLocation({
-        latitude: sharedData.latitude,
-        longitude: sharedData.longitude,
-      });
+      (async () => {
+        let reverseGeocodedAddress = await Location.reverseGeocodeAsync({
+          longitude: sharedData.longitude,
+          latitude: sharedData.latitude,
+        });
+        setLocation(reverseGeocodedAddress);
+      })();
     }
   }, [sharedData]);
 
@@ -118,7 +122,6 @@ const OnBoarding = () => {
                   <Text>Gym Location</Text>
                   <Pressable
                     onPress={() => {
-                      console.log(location);
                       router.push({
                         pathname: './location',
                       });
@@ -135,7 +138,7 @@ const OnBoarding = () => {
                   >
                     <Text>
                       {location
-                        ? location.latitude
+                        ? location[0].name
                         : 'Share the exact location of your gym'}
                     </Text>
                   </Pressable>

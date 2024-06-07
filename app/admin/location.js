@@ -19,12 +19,10 @@ import { SharedContext } from '../context';
 const LocationPage = () => {
   const { setSharedData, sharedData } = useContext(SharedContext);
   const router = useRouter();
-  const [latitude, setLatitude] = useState(
-    sharedData ? sharedData.latitude : null
-  );
-  const [longitude, setLongitude] = useState(
-    sharedData ? sharedData.longitude : null
-  );
+  const [userLocation, setUserLocation] = useState({
+    latitude: 0,
+    longitude: 0,
+  });
   const [location, setLocation] = useState(
     sharedData
       ? { latitude: sharedData.latitude, longitude: sharedData.longitude }
@@ -36,30 +34,23 @@ const LocationPage = () => {
       : { latitude: 0, longitude: 0 }
   );
   const [errorMsg, setErrorMsg] = useState(null);
-  const [isLongitudeFocused, setIsLongitudeFocused] = useState(false);
-  const longitudeInputRef = useRef(null);
   const mapRef = useRef();
   const autocompleteRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
+      let location = await Location.getCurrentPositionAsync({});
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
       }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setInitialLocation({
+      let currentLocation = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-      });
-      setLocation({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      });
-      setLatitude(location.coords.latitude);
-      setLongitude(location.coords.longitude);
+      };
+      setUserLocation(currentLocation);
     })();
   }, []);
 
@@ -73,14 +64,32 @@ const LocationPage = () => {
         latitude: sharedData.latitude,
         longitude: sharedData.longitude,
       });
-      setLatitude(sharedData.latitude);
-      setLongitude(sharedData.longitude);
     }
   }, [sharedData]);
 
-  if (!location.latitude == 0 && !location.longitude == 0) {
+  useEffect(() => {
+    if (!sharedData.latitude && !sharedData.longitude) {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        let location = await Location.getCurrentPositionAsync({});
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          return;
+        }
+        let currentLocation = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        };
+        setUserLocation(currentLocation);
+        setInitialLocation(currentLocation);
+        setLocation(currentLocation);
+      })();
+    }
+  }, []);
+
+  if (!userLocation.latitude == 0 && !userLocation.longitude == 0) {
     return (
-      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={{ flex: 1 }}>
             <Stack.Screen
@@ -88,7 +97,7 @@ const LocationPage = () => {
                 headerShown: false,
               }}
             />
-            <View style={{ height: isLongitudeFocused ? '30%' : '50%' }}>
+            <View style={{ height: isFocused ? '50%' : '78%' }}>
               <MapView
                 ref={mapRef}
                 style={{ flex: 1 }}
@@ -113,8 +122,6 @@ const LocationPage = () => {
                     latitude: event.nativeEvent.coordinate.latitude,
                     longitude: event.nativeEvent.coordinate.longitude,
                   });
-                  setLatitude(String(event.nativeEvent.coordinate.latitude));
-                  setLongitude(String(event.nativeEvent.coordinate.longitude));
                 }}
               >
                 <Marker
@@ -125,7 +132,7 @@ const LocationPage = () => {
                 />
               </MapView>
             </View>
-            <View style={{ height: isLongitudeFocused ? '70%' : '50%' }}>
+            <View style={{ height: isFocused ? '50%' : '22%' }}>
               <GooglePlacesAutocomplete
                 ref={autocompleteRef}
                 placeholder="Find your gym?"
@@ -148,6 +155,8 @@ const LocationPage = () => {
                 textInputProps={{
                   placeholderTextColor: 'grey',
                   clearButtonMode: 'always',
+                  onFocus: () => setIsFocused(true),
+                  onBlur: () => setIsFocused(false),
                 }}
                 nearbyPlacesAPI="GooglePlacesSearch"
                 debounce={400}
@@ -164,8 +173,6 @@ const LocationPage = () => {
                     latitude: details.geometry.location.lat,
                     longitude: details.geometry.location.lng,
                   });
-                  setLatitude(String(details.geometry.location.lat));
-                  setLongitude(String(details.geometry.location.lng));
                 }}
                 query={{
                   key: GOOGLE_MAPS_API,
@@ -174,127 +181,40 @@ const LocationPage = () => {
               />
               <View
                 style={{
-                  paddingHorizontal: 20,
+                  width: '100%',
                   marginTop: 20,
-                  alignItems: 'center',
+                  paddingHorizontal: 20,
+                  justifyContent: 'start',
+                  alignItems: 'flex-end',
                 }}
               >
-                <Text>Couldn't find your gym?</Text>
-                <View
-                  style={{
-                    width: '100%',
-                    alignItems: 'flex-start',
-                    marginTop: 20,
-                    gap: 10,
+                <Pressable
+                  onPress={() => {
+                    if (
+                      location.latitude == userLocation.latitude &&
+                      location.longitude == userLocation.longitude
+                    ) {
+                      Alert.alert(
+                        'Missing Coordinates',
+                        'Please select a location to proceed.',
+                        [
+                          {
+                            text: 'OK',
+                            onPress: () => null,
+                          },
+                        ]
+                      );
+                    } else {
+                      setSharedData({
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                      });
+                      router.back();
+                    }
                   }}
                 >
-                  <Text style={{}}>Enter geo-coordinates</Text>
-                  <TextInput
-                    clearButtonMode="always"
-                    onFocus={() => setIsLongitudeFocused(true)}
-                    onBlur={() => setIsLongitudeFocused(false)}
-                    value={sharedData ? sharedData.latitude : latitude}
-                    onChangeText={setLatitude}
-                    placeholder="Enter latitude"
-                    keyboardType="default"
-                    placeholderTextColor="grey"
-                    style={{
-                      paddingVertical: 15,
-                      paddingLeft: 13.5,
-                      backgroundColor: '#DDDDDF',
-                      width: '100%',
-                      borderRadius: 8,
-                    }}
-                  />
-                  <TextInput
-                    clearButtonMode="always"
-                    onFocus={() => setIsLongitudeFocused(true)}
-                    onBlur={() => setIsLongitudeFocused(false)}
-                    ref={longitudeInputRef}
-                    value={sharedData ? sharedData.longitude : longitude}
-                    onChangeText={setLongitude}
-                    placeholder="Enter longitude"
-                    keyboardType="default"
-                    placeholderTextColor="grey"
-                    style={{
-                      paddingVertical: 15,
-                      paddingLeft: 13.5,
-                      backgroundColor: '#DDDDDF',
-                      width: '100%',
-                      borderRadius: 8,
-                    }}
-                  />
-                  <View
-                    style={{
-                      width: '100%',
-                      alignItems: 'center',
-                      marginTop: 20,
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Pressable
-                      onPress={() => {
-                        if (autocompleteRef.current !== null) {
-                          autocompleteRef.current.setAddressText('');
-                        }
-                        if (latitude && longitude) {
-                          mapRef.current?.animateToRegion({
-                            latitude: latitude,
-                            longitude: longitude,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,
-                          });
-                          setLocation({
-                            latitude: latitude,
-                            longitude: longitude,
-                          });
-                        }
-                        if (!latitude || !longitude) {
-                          Alert.alert(
-                            'Missing Coordinates',
-                            'Please enter both latitude and longitude to proceed.',
-                            [
-                              {
-                                text: 'OK',
-                                onPress: () => console.log('OK Pressed'),
-                              },
-                            ]
-                          );
-                        }
-                      }}
-                    >
-                      <Text>Get Location!</Text>
-                    </Pressable>
-                    <Pressable
-                      onPress={() => {
-                        if (
-                          location.latitude == initialLocation.latitude &&
-                          location.longitude == initialLocation.longitude
-                        ) {
-                          Alert.alert(
-                            'Missing Coordinates',
-                            'Please select a location to proceed.',
-                            [
-                              {
-                                text: 'OK',
-                                onPress: () => null,
-                              },
-                            ]
-                          );
-                        } else {
-                          setSharedData({
-                            latitude: location.latitude,
-                            longitude: location.longitude,
-                          });
-                          router.back();
-                        }
-                      }}
-                    >
-                      <Text>Confirm Location!</Text>
-                    </Pressable>
-                  </View>
-                </View>
+                  <Text>Confirm Location!</Text>
+                </Pressable>
               </View>
             </View>
           </View>
