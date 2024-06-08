@@ -4,7 +4,6 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
-  TextInput,
   Pressable,
   Alert,
 } from 'react-native';
@@ -89,7 +88,7 @@ const LocationPage = () => {
 
   if (!userLocation.latitude == 0 && !userLocation.longitude == 0) {
     return (
-      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
+      <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={{ flex: 1 }}>
             <Stack.Screen

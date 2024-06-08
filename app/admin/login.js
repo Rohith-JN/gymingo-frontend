@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
 import {
   TextInput,
@@ -11,6 +11,7 @@ import { useRef, useState } from 'react';
 const Login = () => {
   const inputRefs = useRef([]);
   const [code, setCode] = useState(Array(6).fill(''));
+  const router = useRouter();
 
   const handleTextChange = (text, index) => {
     let newCode = [...code];
@@ -30,7 +31,11 @@ const Login = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView edges={['bottom', 'left', 'right']} style={{ flex: 1 }}>
-        <KeyboardAvoidingView behavior="height" keyboardVerticalOffset={-260}>
+        <KeyboardAvoidingView
+          behavior="position"
+          style={{ flex: 1 }}
+          keyboardVerticalOffset={-130}
+        >
           <View
             style={{
               flexDirection: 'column',
@@ -81,7 +86,11 @@ const Login = () => {
                   <TextInput
                     maxLength={1}
                     placeholder=""
-                    keyboardType="numeric"
+                    keyboardType={
+                      code[5] !== '' && !code.includes('')
+                        ? 'default'
+                        : 'numeric'
+                    }
                     style={{
                       paddingVertical: 11,
                       paddingLeft: 13.5,
@@ -102,6 +111,13 @@ const Login = () => {
                     ref={(ref) => (inputRefs.current[index] = ref)}
                     onChangeText={(text) => handleTextChange(text, index)}
                     value={code[index]}
+                    onSubmitEditing={() => {
+                      console.log(code);
+                      router.push({
+                        pathname: './(tabs)/[id]',
+                        params: { id: code.join('') },
+                      });
+                    }}
                   />
                 ))}
               </View>

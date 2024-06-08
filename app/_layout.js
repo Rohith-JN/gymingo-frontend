@@ -31,6 +31,25 @@ const Layout = () => {
             ),
           }}
         />
+        <Stack.Screen
+          name="admin/onBoarding"
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>
+                Gymingo
+              </Text>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="admin/(tabs)"
+          options={{
+            headerShown: false,
+            headerBackVisible: false,
+            gestureEnabled: false,
+          }}
+        />
       </Stack>
     </SharedContext>
   );
