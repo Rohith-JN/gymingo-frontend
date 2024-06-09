@@ -9,11 +9,11 @@ import {
 import { useRef, useState } from 'react';
 
 const Login = () => {
-  const inputRefs = useRef([]);
+  const inputRefs = useRef<any>([]); // get type
   const [code, setCode] = useState(Array(6).fill(''));
   const router = useRouter();
 
-  const handleTextChange = (text, index) => {
+  const handleTextChange = (text: string, index: number) => {
     let newCode = [...code];
     newCode[index] = text;
     setCode(newCode);
@@ -30,7 +30,7 @@ const Login = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView edges={['bottom', 'left', 'right']} style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <KeyboardAvoidingView
           behavior="position"
           style={{ flex: 1 }}
@@ -40,7 +40,7 @@ const Login = () => {
             style={{
               flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'start',
+              justifyContent: 'flex-start',
               height: '100%',
               marginTop: 100,
             }}
@@ -53,7 +53,6 @@ const Login = () => {
                 width: '80%',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: 14,
               }}
             >
               <Text
@@ -70,7 +69,6 @@ const Login = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: '80%',
               }}
             >
               <View

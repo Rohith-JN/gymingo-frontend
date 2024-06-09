@@ -8,33 +8,34 @@ import {
   Alert,
 } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef, useContext, LegacyRef } from 'react';
 import { useRouter, Stack } from 'expo-router';
 import * as Location from 'expo-location';
 import { GOOGLE_MAPS_API } from '@env';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { GooglePlacesAutocomplete, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
 import { SharedContext } from '../context';
 
 const LocationPage = () => {
   const { setSharedData, sharedData } = useContext(SharedContext);
   const router = useRouter();
+  const sharedDataCondition = (sharedData.latitude !== 0 && sharedData.longitude !== 0)
   const [userLocation, setUserLocation] = useState({
     latitude: 0,
     longitude: 0,
   });
   const [location, setLocation] = useState(
-    sharedData
+    sharedDataCondition
       ? { latitude: sharedData.latitude, longitude: sharedData.longitude }
       : { latitude: 0, longitude: 0 }
   );
   const [initialLocation, setInitialLocation] = useState(
-    sharedData
+    sharedDataCondition
       ? { latitude: sharedData.latitude, longitude: sharedData.longitude }
       : { latitude: 0, longitude: 0 }
   );
-  const [errorMsg, setErrorMsg] = useState(null);
-  const mapRef = useRef();
-  const autocompleteRef = useRef(null);
+  const [errorMsg, setErrorMsg] = useState<String>("");
+  const mapRef = useRef<MapView>(null);
+  const autocompleteRef = useRef<GooglePlacesAutocompleteRef>(null);
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
@@ -54,7 +55,7 @@ const LocationPage = () => {
   }, []);
 
   useEffect(() => {
-    if (sharedData.latitude && sharedData.longitude) {
+    if (sharedDataCondition) {
       setLocation({
         latitude: sharedData.latitude,
         longitude: sharedData.longitude,
@@ -67,7 +68,7 @@ const LocationPage = () => {
   }, [sharedData]);
 
   useEffect(() => {
-    if (!sharedData.latitude && !sharedData.longitude) {
+    if (!sharedDataCondition) {
       (async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         let location = await Location.getCurrentPositionAsync({});
@@ -86,7 +87,7 @@ const LocationPage = () => {
     }
   }, []);
 
-  if (!userLocation.latitude == 0 && !userLocation.longitude == 0) {
+  if (!(userLocation.latitude == 0) && !(userLocation.longitude == 0)) {
     return (
       <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -108,7 +109,7 @@ const LocationPage = () => {
                 }}
                 onPress={(event) => {
                   if (autocompleteRef.current !== null) {
-                    autocompleteRef.current.setAddressText('');
+                    autocompleteRef.current?.setAddressText('');
                   }
                   mapRef.current?.animateToRegion({
                     latitude: event.nativeEvent.coordinate.latitude,
@@ -160,17 +161,16 @@ const LocationPage = () => {
                 nearbyPlacesAPI="GooglePlacesSearch"
                 debounce={400}
                 fetchDetails={true}
-                returnKeyType={'search'}
                 onPress={(data, details) => {
                   mapRef.current?.animateToRegion({
-                    latitude: details.geometry.location.lat,
-                    longitude: details.geometry.location.lng,
+                    latitude: details!.geometry.location.lat,
+                    longitude: details!.geometry.location.lng,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                   });
                   setLocation({
-                    latitude: details.geometry.location.lat,
-                    longitude: details.geometry.location.lng,
+                    latitude: details!.geometry.location.lat,
+                    longitude: details!.geometry.location.lng,
                   });
                 }}
                 query={{
@@ -183,7 +183,7 @@ const LocationPage = () => {
                   width: '100%',
                   marginTop: 20,
                   paddingHorizontal: 20,
-                  justifyContent: 'start',
+                  justifyContent: 'flex-start',
                   alignItems: 'flex-end',
                 }}
               >

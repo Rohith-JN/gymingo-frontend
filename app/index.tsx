@@ -17,8 +17,8 @@ const Home = () => {
           alignItems: 'center',
         }}
       >
-        <MainButton title="Gym User"></MainButton>
-        <MainButton title="Trainer"></MainButton>
+        <MainButton title="Gym User" onPress={() => { }}></MainButton>
+        <MainButton title="Trainer" onPress={() => { }}></MainButton>
         <MainButton
           title="Gym Admin"
           onPress={() => router.push('/admin/login')}

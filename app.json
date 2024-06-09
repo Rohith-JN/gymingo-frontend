@@ -1,15 +1,17 @@
 {
   "expo": {
+    "name": "gymingo",
+    "slug": "gymingo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "acme",
+    "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.gymingo.gymingo",
       "config": {
         "googleMapsApiKey": ""
       }
-    },
-    "scheme": "acme",
-    "web": {
-      "bundler": "metro"
     },
     "plugins": [
       "expo-router",
@@ -19,8 +21,6 @@
           "locationAlwaysAndWhenInUsePermission": "Allow Gymingo to use your location."
         }
       ]
-    ],
-    "name": "gymingo",
-    "slug": "gymingo"
+    ]
   }
 }

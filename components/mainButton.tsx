@@ -1,6 +1,6 @@
-import { Pressable, Text } from 'react-native';
+import { GestureResponderEvent, Pressable, Text } from 'react-native';
 
-const MainButton = ({ title, onPress }) => {
+const MainButton = ({ title, onPress }: { title: string, onPress: (event: GestureResponderEvent) => void; }) => {
   return (
     <Pressable
       onPress={onPress}

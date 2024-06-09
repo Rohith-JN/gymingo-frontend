@@ -13,14 +13,15 @@ import { Stack, useRouter } from 'expo-router';
 import { useState, useEffect, useContext } from 'react';
 import { SharedContext } from '../context';
 import * as Location from 'expo-location';
+import { LocationGeocodedAddress } from 'expo-location';
 
 const OnBoarding = () => {
   const router = useRouter();
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState<LocationGeocodedAddress[]>();
   const { sharedData } = useContext(SharedContext);
 
   useEffect(() => {
-    if (sharedData && sharedData.latitude && sharedData.longitude) {
+    if (sharedData.latitude !== 0 && sharedData.longitude !== 0) {
       (async () => {
         let reverseGeocodedAddress = await Location.reverseGeocodeAsync({
           longitude: sharedData.longitude,
@@ -33,7 +34,7 @@ const OnBoarding = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView edges={['bottom', 'left', 'right']} style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <Stack.Screen
           options={{
             headerTitle: '',
@@ -61,8 +62,8 @@ const OnBoarding = () => {
               <View
                 style={{
                   flexDirection: 'column',
-                  alignItems: 'start',
-                  gap: '10',
+                  alignItems: 'flex-start',
+                  gap: 10,
                   width: '85%',
                 }}
               >
@@ -74,7 +75,6 @@ const OnBoarding = () => {
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    borderRadius: 14,
                   }}
                 >
                   <Text
@@ -153,7 +153,7 @@ const OnBoarding = () => {
                 >
                   <Text>Upload Photo</Text>
                   <Pressable
-                    onPress={() => {}}
+                    onPress={() => { }}
                     style={{
                       paddingVertical: 11,
                       paddingLeft: 13.5,
@@ -178,7 +178,7 @@ const OnBoarding = () => {
                 >
                   <Text>Proof Of Ownership</Text>
                   <Pressable
-                    onPress={() => {}}
+                    onPress={() => { }}
                     style={{
                       paddingVertical: 11,
                       paddingLeft: 13.5,
@@ -258,7 +258,6 @@ const OnBoarding = () => {
                       width: '40%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      borderRadius: 14,
                       borderWidth: 1,
                       borderColor: '#696767',
                     }}
