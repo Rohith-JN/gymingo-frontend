@@ -1,25 +1,57 @@
 import React from 'react';
 import { View, Pressable, StyleSheet, Text } from 'react-native';
-import { BarChart, stackDataItem } from 'react-native-gifted-charts';
+import { BarChart } from 'react-native-gifted-charts';
 
-const BarChartContainer = ({ stackData }: { stackData: stackDataItem[] }) => (
-    <View style={styles.chartContainer}>
-        <BarChart
-            yAxisTextStyle={{ color: 'white' }}
-            xAxisLabelTextStyle={{ color: 'white' }}
-            xAxisColor='white'
-            yAxisColor='white'
-            rotateLabel
-            noOfSections={4}
-            stackData={stackData}
-        />
-        <View style={styles.buttonsContainer}>
-            <Pressable style={styles.buttonAll}><Text style={styles.buttonText}>ALL</Text></Pressable>
-            <Pressable style={styles.buttonRahul}><Text style={styles.buttonText}>RAHUL</Text></Pressable>
-            <Pressable style={styles.buttonRohan}><Text style={styles.buttonTextRohan}>ROHAN</Text></Pressable>
+const BarChartContainer = () => {
+    const stackData = [
+        {
+            stacks: [
+                { value: 10, color: '#5E8CDD' },
+                { value: 20, color: '#F8B8B8', marginBottom: 2 },
+            ],
+            label: '15th',
+        },
+        {
+            stacks: [
+                { value: 10, color: '#5E8CDD' },
+                { value: 11, color: '#F8B8B8', marginBottom: 2 },
+            ],
+            label: '16th',
+        },
+        {
+            stacks: [
+                { value: 14, color: '#5E8CDD' },
+                { value: 18, color: '#F8B8B8', marginBottom: 2 },
+            ],
+            label: '18th',
+        },
+        {
+            stacks: [
+                { value: 7, color: '#5E8CDD' },
+                { value: 11, color: '#F8B8B8', marginBottom: 2 },
+            ],
+            label: '20th',
+        },
+    ];
+    return (
+        <View style={styles.chartContainer}>
+            <BarChart
+                yAxisTextStyle={{ color: 'white' }}
+                xAxisLabelTextStyle={{ color: 'white' }}
+                xAxisColor='white'
+                yAxisColor='white'
+                rotateLabel
+                noOfSections={4}
+                stackData={stackData}
+            />
+            <View style={styles.buttonsContainer}>
+                <Pressable style={styles.buttonAll}><Text style={styles.buttonText}>ALL</Text></Pressable>
+                <Pressable style={styles.buttonRahul}><Text style={styles.buttonText}>RAHUL</Text></Pressable>
+                <Pressable style={styles.buttonRohan}><Text style={styles.buttonTextRohan}>ROHAN</Text></Pressable>
+            </View>
         </View>
-    </View>
-);
+    );
+};
 
 const styles = StyleSheet.create({
     chartContainer: {
