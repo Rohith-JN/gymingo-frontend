@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   subContainer: {
     flexDirection: 'column',
     gap: 15,
-    width: '100%',
+    width: '85%',
     justifyContent: 'center',
     alignItems: 'center',
   }

@@ -8,11 +8,20 @@ const Layout = () => {
         name="[id]"
         options={{
           headerLeft: () => (
-            <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>Gymingo</Text>
+            <Text style={{}}>Gymingo</Text>
           ),
           headerTitle: '',
           headerLeftContainerStyle: {
             paddingLeft: 20,
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          headerTitle: 'ZENFITNESS',
+          headerTitleStyle: {
+            fontSize: 20, fontWeight: 'bold'
           },
         }}
       />

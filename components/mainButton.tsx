@@ -7,7 +7,7 @@ const MainButton = ({ title, onPress }: { title: string, onPress: (event: Gestur
       style={{
         padding: 20,
         backgroundColor: 'white',
-        width: '80%',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 6,
