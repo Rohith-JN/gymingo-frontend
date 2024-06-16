@@ -27,10 +27,10 @@ const CompositionChart = () => {
         <View style={styles.container}>
             <Text style={styles.title}>{option == 'MUSCLE' ? 'MUSCLE MASS%' : 'FAT%'}</Text>
             <LineChart
-                xAxisColor='white'
-                yAxisColor='white'
-                yAxisTextStyle={{ color: 'white' }}
-                xAxisLabelTextStyle={{ color: 'white' }}
+                xAxisColor='grey'
+                yAxisColor='grey'
+                yAxisTextStyle={{ color: 'grey' }}
+                xAxisLabelTextStyle={{ color: 'grey' }}
                 data={option == 'MUSCLE' ? MuscleMass : Fat}
                 height={170}
                 spacing={30}
@@ -53,7 +53,7 @@ const CompositionChart = () => {
                     else {
                         setOption('MUSCLE')
                     }
-                }} style={{ paddingVertical: 10, paddingHorizontal: 15, borderRadius: 20, backgroundColor: 'red', borderColor: 'white', borderWidth: option == 'MUSCLE' ? 1.5 : 0 }}><Text style={{ color: 'white', fontWeight: 'bold' }}>MUSCLE</Text></Pressable>
+                }} style={{ paddingVertical: 10, paddingHorizontal: 15, borderRadius: 20, backgroundColor: 'red', borderColor: 'grey', borderWidth: option == 'MUSCLE' ? 1.5 : 0 }}><Text style={{ color: 'white', fontWeight: 'bold' }}>MUSCLE</Text></Pressable>
                 <Pressable onPress={() => {
                     if (option == 'FAT') {
 
@@ -61,7 +61,7 @@ const CompositionChart = () => {
                     else {
                         setOption('FAT')
                     }
-                }} style={{ paddingVertical: 10, paddingHorizontal: 15, borderRadius: 20, backgroundColor: 'yellow', borderColor: 'white', borderWidth: option == 'FAT' ? 1.5 : 0 }}><Text style={{ color: 'black', fontWeight: 'bold' }}>FAT</Text></Pressable>
+                }} style={{ paddingVertical: 10, paddingHorizontal: 15, borderRadius: 20, backgroundColor: 'yellow', borderColor: 'grey', borderWidth: option == 'FAT' ? 1.5 : 0 }}><Text style={{ color: 'grey', fontWeight: 'bold' }}>FAT</Text></Pressable>
             </View>
         </View>
     );
@@ -69,10 +69,17 @@ const CompositionChart = () => {
 
 const styles = StyleSheet.create({
     container: {
-        height: 345, width: '85%', alignItems: 'flex-end', gap: 20, backgroundColor: '#373637', borderRadius: 10
+        height: 345, width: '85%', alignItems: 'flex-end', gap: 20, backgroundColor: 'white', borderRadius: 10, shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
     },
     title: {
-        color: 'white', fontSize: 16, marginTop: 20, fontWeight: 'bold', paddingRight: 20
+        color: 'grey', fontSize: 16, marginTop: 20, fontWeight: 'bold', paddingRight: 20
     }
 })
 

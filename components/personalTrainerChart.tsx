@@ -21,10 +21,10 @@ const PersonalTrainerChart = () => {
             <Text style={styles.chartTitle}>PERSONAL TRAINER SUBSCRIPTION GROWTH</Text>
             <Text style={styles.chartSubtitle}>8 May - 26 May</Text>
             <LineChart
-                xAxisColor='white'
-                yAxisColor='white'
-                yAxisTextStyle={{ color: 'white' }}
-                xAxisLabelTextStyle={{ color: 'white' }}
+                xAxisColor='grey'
+                yAxisColor='grey'
+                yAxisTextStyle={{ color: 'grey' }}
+                xAxisLabelTextStyle={{ color: 'grey' }}
                 data={data}
                 data2={data2}
                 height={170}
@@ -59,17 +59,25 @@ const styles = StyleSheet.create({
         width: '85%',
         alignItems: 'center',
         gap: 20,
-        backgroundColor: '#373637',
+        backgroundColor: 'white',
         borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
     },
     chartTitle: {
-        color: 'white',
+        color: 'grey',
         fontSize: 10,
         marginTop: 20,
         fontWeight: 'bold',
     },
     chartSubtitle: {
-        color: 'white',
+        color: 'grey',
         fontSize: 10,
         fontWeight: 'bold',
     },

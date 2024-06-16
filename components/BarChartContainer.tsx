@@ -36,10 +36,10 @@ const BarChartContainer = () => {
     return (
         <View style={styles.chartContainer}>
             <BarChart
-                yAxisTextStyle={{ color: 'white' }}
-                xAxisLabelTextStyle={{ color: 'white' }}
-                xAxisColor='white'
-                yAxisColor='white'
+                yAxisTextStyle={{ color: 'grey' }}
+                xAxisLabelTextStyle={{ color: 'grey' }}
+                xAxisColor='grey'
+                yAxisColor='grey'
                 rotateLabel
                 noOfSections={4}
                 stackData={stackData}
@@ -59,9 +59,17 @@ const styles = StyleSheet.create({
         width: '85%',
         alignItems: 'center',
         gap: 35,
-        backgroundColor: '#373637',
+        backgroundColor: 'white',
         borderRadius: 10,
         paddingTop: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
     },
     buttonsContainer: {
         width: '100%',
@@ -95,7 +103,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     buttonTextRohan: {
-        color: 'black',
+        color: 'grey',
         fontWeight: 'bold',
     },
 });

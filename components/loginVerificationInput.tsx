@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 
 
-const LoginVerificationInput = () => {
+const LoginVerificationInput = ({ path }: { path: string }) => {
     const inputRefs = useRef<any>([]); // get type
     const [code, setCode] = useState(Array(6).fill(''));
     const router = useRouter();
@@ -62,7 +62,7 @@ const LoginVerificationInput = () => {
                     value={code[index]}
                     onSubmitEditing={() => {
                         router.push({
-                            pathname: './(tabs)/[id]',
+                            pathname: path,
                             params: { id: code.join('') },
                         });
                     }}

@@ -8,9 +8,12 @@ const Layout = () => {
         name="[id]"
         options={{
           headerLeft: () => (
-            <Text style={{}}>Gymingo</Text>
+            <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>Gymingo</Text>
           ),
           headerTitle: '',
+          headerStyle: {
+            backgroundColor: 'transparent'
+          },
           headerLeftContainerStyle: {
             paddingLeft: 20,
           },

@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     alignItems: 'center',
-    gap: 10,
+    gap: 20,
     marginTop: 20,
+    marginBottom: 20
   },
-
 });
 
 export default User;

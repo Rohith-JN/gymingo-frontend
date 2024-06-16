@@ -1,8 +1,9 @@
 import { SafeAreaView, ScrollView, StyleSheet, View, Text, GestureResponderEvent, Pressable } from "react-native";
 import MainButton from "../../../components/mainButton";
+import { useRouter } from "expo-router";
 
 const Settings = () => {
-
+    const router = useRouter();
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.mainContainer}>
@@ -10,7 +11,7 @@ const Settings = () => {
                 <View style={styles.scrollView}>
                     <Text style={{ fontSize: 20, fontWeight: '500' }}>Settings</Text>
                     <MainButton title={"Gym Details"} onPress={() => { }} />
-                    <MainButton title={"Trainer Onboarding"} onPress={() => { }} />
+                    <MainButton title={"Trainer Onboarding"} onPress={() => { router.push('../trainerOnboarding') }} />
                     <MainButton title={"Trainee Details"} onPress={() => { }} />
                     <MainButton title={"Location Calibration"} onPress={() => { }} />
                     <View style={styles.buttonContainer}>
@@ -19,7 +20,6 @@ const Settings = () => {
                     </View>
                 </View>
             </View>
-
         </SafeAreaView>
     );
 }

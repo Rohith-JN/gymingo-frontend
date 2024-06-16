@@ -7,7 +7,7 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.subContainer}>
         <MainButton title="Gym User" onPress={() => { }}></MainButton>
-        <MainButton title="Trainer" onPress={() => { }}></MainButton>
+        <MainButton title="Trainer" onPress={() => router.push('/trainer/login')}></MainButton>
         <MainButton
           title="Gym Admin"
           onPress={() => router.push('/admin/login')}

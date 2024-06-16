@@ -50,6 +50,17 @@ const Layout = () => {
             gestureEnabled: false,
           }}
         />
+        <Stack.Screen
+          name="trainer/login"
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>
+                Gymingo
+              </Text>
+            ),
+          }}
+        />
       </Stack>
     </SharedContext>
   );

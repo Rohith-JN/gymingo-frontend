@@ -24,11 +24,11 @@ const Login = () => {
             <View
               style={styles.subContainer}
             >
-              <LoginVerificationInput path={'./(tabs)/[id]'} />
+              <LoginVerificationInput path={''} />
               <Text>
                 New user!{' '}
-                <Link href="./onBoarding" style={styles.link}>
-                  Get Onboarded
+                <Link href="" style={styles.link}>
+                  Contact Your Admin
                 </Link>
               </Text>
             </View>
