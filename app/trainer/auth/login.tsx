@@ -5,8 +5,8 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
 } from 'react-native';
-import HeaderContainer from '../../components/headerContainer';
-import LoginVerificationInput from '../../components/loginVerificationInput';
+import HeaderContainer from '../../../components/headerContainer';
+import LoginVerificationInput from '../../../components/loginVerificationInput';
 
 const Login = () => {
   return (

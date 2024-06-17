@@ -8,12 +8,12 @@ import {
   Alert,
 } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { useState, useEffect, useRef, useContext, LegacyRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { useRouter, Stack } from 'expo-router';
 import * as Location from 'expo-location';
 import { GOOGLE_MAPS_API } from '@env';
 import { GooglePlacesAutocomplete, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
-import { SharedContext } from '../context';
+import { SharedContext } from '../../../context';
 
 const LocationPage = () => {
   const { setSharedData, sharedData } = useContext(SharedContext);
@@ -92,11 +92,6 @@ const LocationPage = () => {
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={{ flex: 1 }}>
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-            />
             <View style={{ height: isFocused ? '50%' : '78%' }}>
               <MapView
                 ref={mapRef}

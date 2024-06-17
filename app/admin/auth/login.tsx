@@ -5,8 +5,8 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
 } from 'react-native';
-import HeaderContainer from '../../components/headerContainer';
-import LoginVerificationInput from '../../components/loginVerificationInput';
+import HeaderContainer from '../../../components/headerContainer';
+import LoginVerificationInput from '../../../components/loginVerificationInput';
 
 const Login = () => {
   return (
@@ -24,10 +24,10 @@ const Login = () => {
             <View
               style={styles.subContainer}
             >
-              <LoginVerificationInput path={'./(tabs)/[id]'} />
+              <LoginVerificationInput path={'admin/(tabs)/[id]'} />
               <Text>
                 New user!{' '}
-                <Link href="./onBoarding" style={styles.link}>
+                <Link href="admin/auth/onboarding/onBoarding" style={styles.link}>
                   Get Onboarded
                 </Link>
               </Text>

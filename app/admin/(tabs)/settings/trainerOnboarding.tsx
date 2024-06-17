@@ -1,8 +1,8 @@
 import { SafeAreaView, ScrollView, StyleSheet, View, Text, GestureResponderEvent, Pressable, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from "react-native";
-import MainButton from "../../components/mainButton";
+import MainButton from "../../../../components/mainButton";
 import { Stack } from "expo-router";
-import HeaderContainer from "../../components/headerContainer";
-import InputField from "../../components/inputField";
+import HeaderContainer from "../../../../components/headerContainer";
+import InputField from "../../../../components/inputField";
 
 const TrainerOnboarding = () => {
 
@@ -15,14 +15,6 @@ const TrainerOnboarding = () => {
                     style={styles.keyboardAvoidingView}
                     keyboardVerticalOffset={100}
                 >
-                    <Stack.Screen
-
-                        options={{
-                            headerTitle: 'Trainers Onboarding',
-                            headerBackTitleVisible: false
-                        }}
-                    />
-
                     <View style={styles.mainContainer}>
 
                         <ScrollView style={styles.scrollView} contentContainerStyle={{

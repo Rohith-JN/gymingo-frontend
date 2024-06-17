@@ -9,14 +9,14 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
 } from 'react-native';
-import { Stack, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useState, useEffect, useContext } from 'react';
-import { SharedContext } from '../context';
+import { SharedContext } from '../../../context';
 import * as Location from 'expo-location';
 import { LocationGeocodedAddress } from 'expo-location';
-import HeaderContainer from '../../components/headerContainer';
-import InputField from '../../components/inputField';
-import UploadButton from '../../components/uploadButton';
+import HeaderContainer from '../../../../components/headerContainer';
+import InputField from '../../../../components/inputField';
+import UploadButton from '../../../../components/uploadButton';
 
 const OnBoarding = () => {
   const router = useRouter();
@@ -38,14 +38,6 @@ const OnBoarding = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView style={styles.safeArea}>
-        <Stack.Screen
-          options={{
-            headerTitle: '',
-            headerRight: () => (
-              <Text style={styles.headerRightText}>Gymingo</Text>
-            ),
-          }}
-        />
         <KeyboardAvoidingView
           behavior="padding"
           style={styles.keyboardAvoidingView}
@@ -123,7 +115,7 @@ const styles = StyleSheet.create({
   },
   submitContainer: {
     marginTop: 20,
-    width: '100%',
+    width: '85%',
     flexDirection: 'column',
     gap: 10,
     alignItems: 'center',

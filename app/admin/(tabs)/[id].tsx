@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, Text, View, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, View, StyleSheet } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import StatsCard from '../../../components/statsCard';
 import PersonalTrainerChart from '../../../components/personalTrainerChart';
@@ -14,9 +14,7 @@ const User = () => {
         <View style={styles.container}>
           <StatsCard title="Number of trainers" value="03" />
           <StatsCard title="Total Trainees" value="26" />
-          <PersonalTrainerChart
-
-          />
+          <PersonalTrainerChart />
           <BarChartContainer />
           <CompositionChart />
         </View>

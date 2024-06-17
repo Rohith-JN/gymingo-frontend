@@ -7,25 +7,21 @@ const Layout = () => {
       <Tabs.Screen
         name="[id]"
         options={{
-          headerLeft: () => (
-            <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>Gymingo</Text>
-          ),
           headerTitle: '',
-          headerStyle: {
-            backgroundColor: 'transparent'
-          },
+          headerLeft: () => (
+            <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>
+              Gymingo
+            </Text>
+          ),
           headerLeftContainerStyle: {
-            paddingLeft: 20,
-          },
+            paddingLeft: 20
+          }
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
-          headerTitle: 'ZENFITNESS',
-          headerTitleStyle: {
-            fontSize: 20, fontWeight: 'bold'
-          },
+          headerShown: false
         }}
       />
     </Tabs>

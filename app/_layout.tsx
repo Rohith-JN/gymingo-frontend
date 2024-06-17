@@ -1,6 +1,5 @@
 import { Stack } from 'expo-router';
 import { useFonts, Langar_400Regular } from '@expo-google-fonts/langar';
-import { Text } from 'react-native';
 import SharedContext from './context';
 
 const Layout = () => {
@@ -21,44 +20,17 @@ const Layout = () => {
           }}
         />
         <Stack.Screen
-          name="admin/login"
-          options={{
-            headerTitle: '',
-            headerRight: () => (
-              <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>
-                Gymingo
-              </Text>
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="admin/onBoarding"
-          options={{
-            headerTitle: '',
-            headerRight: () => (
-              <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>
-                Gymingo
-              </Text>
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="admin/(tabs)"
+          name="admin"
           options={{
             headerShown: false,
-            headerBackVisible: false,
             gestureEnabled: false,
           }}
         />
         <Stack.Screen
-          name="trainer/login"
+          name="trainer"
           options={{
-            headerTitle: '',
-            headerRight: () => (
-              <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>
-                Gymingo
-              </Text>
-            ),
+            headerShown: false,
+            gestureEnabled: false,
           }}
         />
       </Stack>
