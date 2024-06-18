@@ -1,6 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, View, Text, GestureResponderEvent, Pressable, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from "react-native";
-import MainButton from "../../../../components/mainButton";
-import { Stack } from "expo-router";
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, Pressable, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from "react-native";
 import HeaderContainer from "../../../../components/headerContainer";
 import InputField from "../../../../components/inputField";
 

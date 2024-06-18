@@ -1,6 +1,5 @@
 import { View, TextInput } from 'react-native'
 import { useRouter } from 'expo-router';
-
 import { useRef, useState } from 'react';
 
 

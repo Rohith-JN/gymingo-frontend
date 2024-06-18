@@ -1,5 +1,6 @@
 import { Stack, useRouter } from 'expo-router';
-import { Text, Pressable } from 'react-native'
+import { Text } from 'react-native'
+import BackButton from '../../../components/backButton';
 
 const Layout = () => {
     const router = useRouter()
@@ -10,7 +11,7 @@ const Layout = () => {
                 options={{
                     gestureEnabled: true,
                     headerTitle: '',
-                    headerLeft: () => <Pressable onPress={() => router.back()}><Text style={{ color: '#4280EF', fontSize: 15 }}>Go Back</Text></Pressable>,
+                    headerLeft: () => <BackButton />,
                     headerRight: () => (
                         <Text style={{ fontFamily: 'Langar', fontSize: 20 }}>
                             Gymingo

@@ -13,24 +13,24 @@ import { useRouter, Stack } from 'expo-router';
 import * as Location from 'expo-location';
 import { GOOGLE_MAPS_API } from '@env';
 import { GooglePlacesAutocomplete, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
-import { SharedContext } from '../../../context';
+import { LocationContext } from '../../../context';
 
 const LocationPage = () => {
-  const { setSharedData, sharedData } = useContext(SharedContext);
+  const { setLocationData, locationData } = useContext(LocationContext);
   const router = useRouter();
-  const sharedDataCondition = (sharedData.latitude !== 0 && sharedData.longitude !== 0)
+  const locationDataCondition = (locationData.latitude !== 0 && locationData.longitude !== 0)
   const [userLocation, setUserLocation] = useState({
     latitude: 0,
     longitude: 0,
   });
   const [location, setLocation] = useState(
-    sharedDataCondition
-      ? { latitude: sharedData.latitude, longitude: sharedData.longitude }
+    locationDataCondition
+      ? { latitude: locationData.latitude, longitude: locationData.longitude }
       : { latitude: 0, longitude: 0 }
   );
   const [initialLocation, setInitialLocation] = useState(
-    sharedDataCondition
-      ? { latitude: sharedData.latitude, longitude: sharedData.longitude }
+    locationDataCondition
+      ? { latitude: locationData.latitude, longitude: locationData.longitude }
       : { latitude: 0, longitude: 0 }
   );
   const [errorMsg, setErrorMsg] = useState<String>("");
@@ -55,20 +55,20 @@ const LocationPage = () => {
   }, []);
 
   useEffect(() => {
-    if (sharedDataCondition) {
+    if (locationDataCondition) {
       setLocation({
-        latitude: sharedData.latitude,
-        longitude: sharedData.longitude,
+        latitude: locationData.latitude,
+        longitude: locationData.longitude,
       });
       setInitialLocation({
-        latitude: sharedData.latitude,
-        longitude: sharedData.longitude,
+        latitude: locationData.latitude,
+        longitude: locationData.longitude,
       });
     }
-  }, [sharedData]);
+  }, [locationData]);
 
   useEffect(() => {
-    if (!sharedDataCondition) {
+    if (!locationDataCondition) {
       (async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         let location = await Location.getCurrentPositionAsync({});
@@ -199,7 +199,7 @@ const LocationPage = () => {
                         ]
                       );
                     } else {
-                      setSharedData({
+                      setLocationData({
                         latitude: location.latitude,
                         longitude: location.longitude,
                       });

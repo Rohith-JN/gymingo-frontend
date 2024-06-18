@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState, useEffect, useContext } from 'react';
-import { SharedContext } from '../../../context';
+import { LocationContext } from '../../../context';
 import * as Location from 'expo-location';
 import { LocationGeocodedAddress } from 'expo-location';
 import HeaderContainer from '../../../../components/headerContainer';
@@ -21,19 +21,19 @@ import UploadButton from '../../../../components/uploadButton';
 const OnBoarding = () => {
   const router = useRouter();
   const [location, setLocation] = useState<LocationGeocodedAddress[]>();
-  const { sharedData } = useContext(SharedContext);
+  const { locationData } = useContext(LocationContext);
 
   useEffect(() => {
-    if (sharedData.latitude !== 0 && sharedData.longitude !== 0) {
+    if (locationData.latitude !== 0 && locationData.longitude !== 0) {
       (async () => {
         let reverseGeocodedAddress = await Location.reverseGeocodeAsync({
-          longitude: sharedData.longitude,
-          latitude: sharedData.latitude,
+          longitude: locationData.longitude,
+          latitude: locationData.latitude,
         });
         setLocation(reverseGeocodedAddress);
       })();
     }
-  }, [sharedData]);
+  }, [locationData]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

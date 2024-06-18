@@ -1,25 +1,25 @@
 import React, { ReactNode, useState } from 'react';
 
-export const SharedContext = React.createContext({
-  sharedData: { latitude: 0, longitude: 0 },
-  setSharedData: (val: { latitude: number, longitude: number }) => { },
+export const LocationContext = React.createContext({
+  locationData: { latitude: 0, longitude: 0 },
+  setLocationData: (val: { latitude: number, longitude: number }) => { },
 });
 
-export default function SharedDataProvider({ children }: { children: ReactNode }) {
+export default function LocationDataProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState({ latitude: 0, longitude: 0 });
 
-  function setSharedData(value: { latitude: number, longitude: number }) {
+  function setLocationData(value: { latitude: number, longitude: number }) {
     setData(value);
   }
 
   return (
-    <SharedContext.Provider
+    <LocationContext.Provider
       value={{
-        sharedData: data,
-        setSharedData,
+        locationData: data,
+        setLocationData,
       }}
     >
       {children}
-    </SharedContext.Provider>
+    </LocationContext.Provider>
   );
 }
