@@ -15,7 +15,7 @@ const SettingsPage = () => {
                     <MainButton title={"Trainee Details"} onPress={() => { }} />
                     <MainButton title={"Location Calibration"} onPress={() => { }} />
                     <View style={styles.buttonContainer}>
-                        <Pressable style={styles.pressable}><Text style={{ color: 'white', fontFamily: 'bold' }}>Log Out</Text></Pressable>
+                        <Pressable style={styles.pressable}><Text style={{ color: 'white', fontWeight: 'bold' }}>Log Out</Text></Pressable>
 
                     </View>
                 </View>

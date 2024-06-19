@@ -9,6 +9,13 @@ const Layout = () => {
                     headerShown: false
                 }}
             />
+            <Stack.Screen
+                name="(tabs)"
+                options={{
+                    headerShown: false,
+                    gestureEnabled: false
+                }}
+            />
         </Stack>
     );
 };
