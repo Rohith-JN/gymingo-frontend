@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
   },
   submitContainer: {
     marginTop: 20,
+    marginBottom: 20,
     width: '85%',
     flexDirection: 'column',
     gap: 10,

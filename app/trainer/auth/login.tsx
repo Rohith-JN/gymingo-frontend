@@ -24,7 +24,7 @@ const Login = () => {
             <View
               style={styles.subContainer}
             >
-              <LoginVerificationInput path={'trainer/(tabs)/[id]'} />
+              <LoginVerificationInput path={'trainer/(tabs)/trainer/[id]'} />
               <Text>
                 New user!{' '}
                 <Link href="" style={styles.link}>

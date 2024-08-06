@@ -1,8 +1,10 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
 import { useState } from 'react';
 
 const CompositionChart = () => {
+    const screenWidth = Dimensions.get('window').width;
+    const containerWidth = screenWidth * 0.65;
     const [option, setOption] = useState('MUSCLE')
 
     const MuscleMass = [
@@ -38,6 +40,7 @@ const CompositionChart = () => {
                 thickness1={3}
                 color1={option == 'MUSCLE' ? "red" : "yellow"}
                 noOfSections={4}
+                width={containerWidth}
                 dataPointsColor1={option == 'MUSCLE' ? "red" : "yellow"}
                 textShiftY={-2}
                 textShiftX={-5}

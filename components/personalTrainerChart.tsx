@@ -1,8 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
 
 const PersonalTrainerChart = () => {
+    const screenWidth = Dimensions.get('window').width;
+    const containerWidth = screenWidth * 0.65;
+
     const data = [
         { value: 5, label: '10th' },
         { value: 10, label: '14th' },
@@ -28,7 +31,8 @@ const PersonalTrainerChart = () => {
                 data={data}
                 data2={data2}
                 height={170}
-                spacing={60}
+                spacing={78}
+                width={containerWidth}
                 initialSpacing={15}
                 thickness1={3}
                 thickness2={3}
@@ -55,7 +59,7 @@ const PersonalTrainerChart = () => {
 
 const styles = StyleSheet.create({
     chartContainer: {
-        height: 355,
+        height: 365,
         width: '85%',
         alignItems: 'center',
         gap: 20,

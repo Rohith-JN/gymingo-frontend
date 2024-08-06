@@ -1,12 +1,18 @@
-import { SafeAreaView, ScrollView, View, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, View, StyleSheet, BackHandler } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import StatsCard from '../../../components/statsCard';
 import PersonalTrainerChart from '../../../components/personalTrainerChart';
 import BarChartContainer from '../../../components/barChartContainer';
 import CompositionChart from '../../../components/compositionChart';
+import { useEffect } from 'react';
 
 const User = () => {
   const { id } = useLocalSearchParams();
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+    return () => backHandler.remove()
+  }, [])
 
   return (
     <SafeAreaView style={styles.safeArea}>

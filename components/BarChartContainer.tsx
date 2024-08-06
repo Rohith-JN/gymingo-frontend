@@ -1,8 +1,11 @@
 import React from 'react';
-import { View, Pressable, StyleSheet, Text } from 'react-native';
+import { View, Pressable, StyleSheet, Text, Dimensions } from 'react-native';
 import { BarChart } from 'react-native-gifted-charts';
 
 const BarChartContainer = () => {
+    const screenWidth = Dimensions.get('window').width;
+    const containerWidth = screenWidth * 0.68;
+
     const stackData = [
         {
             stacks: [
@@ -13,26 +16,13 @@ const BarChartContainer = () => {
         },
         {
             stacks: [
-                { value: 10, color: '#5E8CDD' },
-                { value: 11, color: '#F8B8B8', marginBottom: 2 },
-            ],
-            label: '16th',
-        },
-        {
-            stacks: [
-                { value: 14, color: '#5E8CDD' },
-                { value: 18, color: '#F8B8B8', marginBottom: 2 },
-            ],
-            label: '18th',
-        },
-        {
-            stacks: [
                 { value: 7, color: '#5E8CDD' },
                 { value: 11, color: '#F8B8B8', marginBottom: 2 },
             ],
             label: '20th',
         },
     ];
+
     return (
         <View style={styles.chartContainer}>
             <BarChart
@@ -41,8 +31,10 @@ const BarChartContainer = () => {
                 xAxisColor='grey'
                 yAxisColor='grey'
                 rotateLabel
-                noOfSections={4}
+                noOfSections={stackData.length}
+                spacing={10}
                 stackData={stackData}
+                width={containerWidth}
             />
             <View style={styles.buttonsContainer}>
                 <Pressable style={styles.buttonAll}><Text style={styles.buttonText}>ALL</Text></Pressable>

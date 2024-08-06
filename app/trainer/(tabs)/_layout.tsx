@@ -5,7 +5,7 @@ const Layout = () => {
     return (
         <Tabs>
             <Tabs.Screen
-                name="[id]"
+                name="trainer"
                 options={{
                     headerShown: false
                 }}

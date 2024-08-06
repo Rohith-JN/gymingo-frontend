@@ -1,8 +1,9 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { View, StyleSheet, Text, FlatList, Pressable } from "react-native";
 
 const Trainer = () => {
     const { id } = useLocalSearchParams();
+    const router = useRouter();
     const data = [
         {
             id: 1,
@@ -15,9 +16,9 @@ const Trainer = () => {
     ]
 
     const renderItem = ({ item }: { item: { id: number, name: string } }) => (
-        <View style={{ width: '100%', height: 40, backgroundColor: 'grey', borderRadius: 10, alignItems: 'flex-start', justifyContent: 'center', paddingHorizontal: 20 }}>
+        <Pressable style={{ width: '100%', height: 40, backgroundColor: 'grey', borderRadius: 10, alignItems: 'flex-start', justifyContent: 'center', paddingHorizontal: 20 }} onPress={() => router.push('./traineePage')}>
             <Text style={{ color: 'white', fontWeight: 'bold' }}>{item.name}</Text>
-        </View>
+        </Pressable>
     );
 
     return (
